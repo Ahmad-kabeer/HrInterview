@@ -1,0 +1,49 @@
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Problem {
+
+    static int ToPair(int[] array,int N) throws IOException {
+        int elementNumber = 0;
+        int result = 0;
+        for (int i = 0; i < N - 1; i++){
+            for (int j = 0; j < N - i - 1; j++){
+                if (array[j] > array[j + 1]) {
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+            }
+        }
+        int j;
+        for(int i=0;i<N;i++){
+            int element=array[i];
+            elementNumber=0;
+            for(j=i;j<N;j++){
+                if(array[j]==element){
+                    elementNumber++;
+                }
+                else {
+                    break;
+                }
+            }
+            result+=elementNumber/2;
+            i=j-1;
+        }
+        return result;
+    }
+
+
+    public static void main(String[] args) throws IOException{
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the number of socks");
+        int N=sc.nextInt();
+        int[] arr=new int[N];
+        System.out.println("Now enter all sock");
+        for (int i = 0; i < N; i++) {
+            arr[i]=sc.nextInt();
+        }
+        int result=Problem.ToPair(arr,N);
+        System.out.println("Total Pair: "+ result);
+    }
+}
